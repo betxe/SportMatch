@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { LevelPills } from '../components/LevelPills';
 import { ScreenHeader } from '../components/ScreenHeader';
 import { fieldClass, primaryButtonClass } from '../components/styles';
-import { useEval } from '../lib/eval-context';
 import { useApp } from '../state/store';
 import type { Level, SportName, SportSkill } from '../types';
 import { SPORTS } from '../types';
 
 export function OnboardingPlayerCard({ mode }: { mode: 'create' | 'edit' }) {
   const { state, completeProfile } = useApp();
-  const { log } = useEval();
   const navigate = useNavigate();
   const { profile } = state;
   const [name, setName] = useState(profile.name);
@@ -53,7 +51,6 @@ export function OnboardingPlayerCard({ mode }: { mode: 'create' | 'edit' }) {
         onSubmit={(event) => {
           event.preventDefault();
           if (!canNext) {
-            if (hint) log({ type: 'error shown', detail: hint });
             setNameTouched(true);
             setAgeTouched(true);
             return;
@@ -73,10 +70,7 @@ export function OnboardingPlayerCard({ mode }: { mode: 'create' | 'edit' }) {
               className={fieldClass}
               value={name}
               autoComplete="name"
-              onBlur={() => {
-                setNameTouched(true);
-                if (!name.trim()) log({ type: 'error shown', detail: 'Enter your name.' });
-              }}
+              onBlur={() => setNameTouched(true)}
               onChange={(event) => setName(event.target.value)}
             />
             {nameTouched && !nameOk ? (
@@ -97,13 +91,7 @@ export function OnboardingPlayerCard({ mode }: { mode: 'create' | 'edit' }) {
               min={18}
               max={30}
               value={age}
-              onBlur={() => {
-                setAgeTouched(true);
-                const next = Number(age);
-                if (!Number.isInteger(next) || next < 18 || next > 30) {
-                  log({ type: 'error shown', detail: 'Age must be between 18 and 30.' });
-                }
-              }}
+              onBlur={() => setAgeTouched(true)}
               onChange={(event) => setAge(event.target.value)}
             />
             {ageTouched && !ageOk ? (

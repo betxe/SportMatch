@@ -20,7 +20,6 @@ type Action =
   | { type: 'PUBLISH'; draft: SessionDraft; now: number }
   | { type: 'SEND'; sessionId: string; text: string; now: number }
   | { type: 'CONFIRM_ATTENDANCE'; gameId: string; showedUp: Record<string, boolean> }
-  | { type: 'ADD_OFFSET'; deltaMs: number }
   | { type: 'RESET' };
 
 function isAppState(value: unknown): value is AppState {
@@ -42,7 +41,7 @@ function shiftTimes(saved: AppState): AppState {
   return {
     ...saved,
     clockOrigin: origin,
-    timeOffsetMs: saved.timeOffsetMs ?? 0,
+    timeOffsetMs: 0,
     sessions: saved.sessions.map((session) => ({
       ...session,
       startsAt: session.startsAt + delta,
@@ -251,8 +250,6 @@ function reducer(state: State, action: Action): State {
         ),
       };
     }
-    case 'ADD_OFFSET':
-      return { ...state, timeOffsetMs: state.timeOffsetMs + action.deltaMs };
     case 'RESET':
       return { ...createSeed(), pendingUndo: null };
     default:
@@ -280,7 +277,6 @@ interface StoreValue {
   publishSession: (draft: SessionDraft) => void;
   sendMessage: (sessionId: string, text: string) => void;
   confirmAttendance: (gameId: string, showedUp: Record<string, boolean>) => void;
-  simulateFiveHours: () => void;
   resetDemo: () => void;
 }
 
@@ -344,7 +340,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       publishSession: (draft) => dispatch({ type: 'PUBLISH', draft, now }),
       sendMessage: (sessionId, text) => dispatch({ type: 'SEND', sessionId, text, now }),
       confirmAttendance: (gameId, showedUp) => dispatch({ type: 'CONFIRM_ATTENDANCE', gameId, showedUp }),
-      simulateFiveHours: () => dispatch({ type: 'ADD_OFFSET', deltaMs: 5 * 60 * 60 * 1000 }),
       resetDemo: () => {
         dispatch({ type: 'RESET' });
         setRecentJoin(null);

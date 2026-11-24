@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { useEval } from '../lib/eval-context';
 
 export function ConfirmDialog({
   title,
@@ -25,13 +24,11 @@ export function ConfirmDialog({
   cancelTestId?: string;
   testId?: string;
 }) {
-  const { log } = useEval();
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     cancelRef.current?.focus();
-    log({ type: 'dialog shown', detail: `${title}. ${body}` });
-  }, [body, log, title]);
+  }, []);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {

@@ -1,6 +1,5 @@
 import { ArrowLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useEval } from '../lib/eval-context';
 
 export function ScreenHeader({
   title,
@@ -11,7 +10,6 @@ export function ScreenHeader({
   onBack?: () => void;
   right?: ReactNode;
 }) {
-  const { log } = useEval();
   return (
     <header className="flex items-center gap-2 px-4 py-3">
       {onBack ? (
@@ -19,10 +17,7 @@ export function ScreenHeader({
           type="button"
           data-testid="back-button"
           className="inline-flex h-12 shrink-0 items-center gap-1 rounded-xl pr-1 text-base font-semibold text-ink"
-          onClick={() => {
-            log({ type: 'back pressed', detail: title });
-            onBack();
-          }}
+          onClick={onBack}
         >
           <ArrowLeft size={20} aria-hidden />
           Back

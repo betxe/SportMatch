@@ -35,10 +35,6 @@ export function formatWhen(ts: number, now: number): string {
   return `${weekday}, ${time}`;
 }
 
-export function formatClock(now: number): string {
-  return formatWhen(now, now);
-}
-
 export function toDateInput(ts: number): string {
   const date = new Date(ts);
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -89,5 +85,3 @@ export function nextWeekdayTime(origin: number, weekday: number, hour: number, m
   }
   return candidate.getTime();
 }
-
-export const FIVE_HOURS_MS = 5 * 60 * 60 * 1000;

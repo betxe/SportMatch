@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ScreenHeader } from '../components/ScreenHeader';
 import { SessionCard } from '../components/SessionCard';
 import { fieldClass, pillClass, primaryButtonClass } from '../components/styles';
-import { useEval } from '../lib/eval-context';
 import { defaultSessionStart, fromDateAndTime, toDateInput, toTimeInput } from '../lib/time';
 import { useApp } from '../state/store';
 import type { Intensity, Level, Session, SportName } from '../types';
@@ -15,7 +14,6 @@ function placeTestId(place: string): string {
 
 export function CreateSession() {
   const { state, now, publishSession, showToast } = useApp();
-  const { log } = useEval();
   const navigate = useNavigate();
   const sports = state.profile.sports;
   const initialSport = sports[0]?.sport ?? 'Football';
@@ -29,11 +27,6 @@ export function CreateSession() {
   const [intensity, setIntensity] = useState<Intensity>('Casual');
   const [spots, setSpots] = useState(10);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (step === 1) return;
-    log({ type: 'screen change', detail: `Step ${step} of 3` });
-  }, [log, step]);
 
   const startsAt = fromDateAndTime(date, time);
 
@@ -70,7 +63,6 @@ export function CreateSession() {
 
   const fail = (message: string) => {
     setError(message);
-    log({ type: 'error shown', detail: message });
   };
 
   const validateWhen = (): number | null => {

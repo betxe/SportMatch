@@ -6,7 +6,6 @@ import { CounterBadge } from '../components/CounterBadge';
 import { ReminderBadge } from '../components/ReminderBadge';
 import { ScreenHeader } from '../components/ScreenHeader';
 import { SportIcon } from '../components/SportIcon';
-import { useEval } from '../lib/eval-context';
 import { findPlayer } from '../lib/players';
 import { formatWhen, isOneHourReminder } from '../lib/time';
 import { useApp } from '../state/store';
@@ -36,7 +35,6 @@ function choiceClass(selected: boolean, tone: 'yes' | 'no'): string {
 
 export function MyGames() {
   const { state, now, leaveSession, joinSession, showToast, confirmAttendance } = useApp();
-  const { log } = useEval();
   const navigate = useNavigate();
   const [checklist, setChecklist] = useState<{ id: string; playerIds: string[]; showedUp: Record<string, boolean> } | null>(
     null,
@@ -76,9 +74,7 @@ export function MyGames() {
   const sayYes = (session: Session) => {
     if (session.playerIds.includes(USER_ID)) return;
     if (session.playerIds.length >= session.spots) {
-      const message = 'This session is full.';
-      showToast(message);
-      log({ type: 'error shown', detail: message });
+      showToast('This session is full.');
       return;
     }
     const slot = joinSession(session.id);

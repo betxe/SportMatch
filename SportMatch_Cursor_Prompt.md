@@ -130,24 +130,14 @@ Show a progress bar and the text "Step 1 of 3".
 6. Attendance can be changed with Yes / No in My Games if plans change.
 7. Primary buttons are always at the bottom of the screen.
 
-## 9. Demo and evaluation helpers (needed for the usability evaluation)
-
-The prototype will be tested with real people and measured with KLM/GOMS, so add a discreet, optional **Evaluation mode** that does not change the UI for normal use:
-
-- Activated with the URL parameter `?eval=1`. Shows a small collapsible panel (bottom of the phone frame, outside the app area) with: **task list**, **Start task / End task** buttons, and a **Download log (JSON and CSV)** button.
-- While a task is running, log every event with a timestamp: `tap` (element id or label), `text input` (characters typed), `screen change`, `error shown`, `dialog shown`, `back pressed`. Compute per task: total time, number of taps, number of keystrokes, number of screen changes, number of errors.
-- Give every interactive element a stable `data-testid` (for example `join-button-s1`, `filter-chip-basketball`).
-- Predefined tasks to list in the panel: **T1** Create the Player Card (Basketball Int., Football Adv.). **T2** Find a basketball session for today and join it. **T3** Create a Football session for tomorrow at 7 PM at Campus Field with 10 spots. **T4** Mark "No" for a game you cannot attend. **T5** Check your attendance percentage. **T6** Send a message in the Session Chat of a session you joined.
-- A "Simulate +5h (show 1h reminder)" button for demonstration of V5, visible only in Evaluation mode.
-
-## 10. Accessibility and quality
+## 9. Accessibility and quality
 
 - Semantic HTML, labels for all inputs, `aria-live="polite"` for the counter and toasts, `alt`/`aria-label` for icons.
 - All text contrast at least 4.5:1; do not use colour alone to convey meaning (the FULL and JOINED states must also have text).
 - Keyboard navigation and visible focus on every control.
 - Check there are no console errors or TypeScript errors, and that `npm run build` succeeds.
 
-## 11. Suggested file structure
+## 10. Suggested file structure
 
 ```
 src/
@@ -156,24 +146,23 @@ src/
   state/store.tsx            (React context + reducer + localStorage)
   components/                (PhoneFrame, BottomNav, FilterChips, SessionCard, LineupSheet,
                               LevelPills, CounterBadge, StaticPinPreview, Toast, ConfirmDialog,
-                              ChatSheet, ReminderBadge, PlayerCard, EvalPanel)
+                              ChatSheet, ReminderBadge, PlayerCard)
   screens/                   (OnboardingPlayerCard, Home, SessionDetail, CreateSession,
                               MyGames, MyPlayerCard)
-  lib/time.ts, lib/eval-logger.ts
+  lib/time.ts
 README.md
 ```
 
-## 12. Build order (do not skip the checks)
+## 11. Build order (do not skip the checks)
 
 1. **Phase 1, foundations:** project setup, theme, PhoneFrame, router, data types, seed data, store with localStorage. Check: app runs, phone frame renders, theme colours applied.
 2. **Phase 2, V1 and V6:** onboarding Player Card and My Player Card. Check: per-sport levels saved and shown.
 3. **Phase 3, V2 and V3:** Noticeboard feed with instant filters, Session Detail with Lineup Sheet, Join / Leave with live counters, level mismatch dialogs, full state, Session Chat. Check: joining on a card and on the detail screen both update the counter in both places.
 4. **Phase 4, V4:** 3-step Create Session with validation. Check: published session appears first in the feed and the user is slot #1.
 5. **Phase 5, V5:** My Games with Yes / No, 1h reminder badge, host attendance confirmation, notifications sheet.
-6. **Phase 6, Evaluation mode:** `?eval=1` panel, logger and downloads, `data-testid` on all controls.
-7. **Phase 7, polish:** accessibility pass, empty states, README, `npm run build`.
+6. **Phase 6, polish:** accessibility pass, empty states, README, `npm run build`.
 
-## 13. Acceptance checklist (verify before finishing)
+## 12. Acceptance checklist (verify before finishing)
 
 - [ ] Six core views exist and match the descriptions (V1 to V6).
 - [ ] Per-sport levels, never one global level.
@@ -186,10 +175,9 @@ README.md
 - [ ] Icons are a minority of the interface; actions have text labels.
 - [ ] Primary buttons fixed at the bottom, at least 56 px high.
 - [ ] Nothing about parents, children, elderly users, GPS routes or verified badges.
-- [ ] Evaluation mode works and exports a log.
 - [ ] `npm run build` passes without errors.
 
-## 14. Out of scope (do not build)
+## 13. Out of scope (do not build)
 
 Real login, real database, real push notifications, GPS routes, verified skill badges, interactive maps, payment, parent/child profiles, elderly mode, voice search, gym-partner matching, running and cycling pace filters.
 
