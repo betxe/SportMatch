@@ -104,9 +104,12 @@ export function MyGames() {
                   className="flex w-full items-start justify-between gap-3 text-left"
                   onClick={() => navigate(`/session/${session.id}`)}
                 >
-                  <span className="flex items-center gap-2 text-lg font-semibold">
-                    <SportIcon sport={session.sport} />
-                    {session.sport}
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-2 text-lg font-semibold">
+                      <SportIcon sport={session.sport} />
+                      {session.sport}
+                    </span>
+                    <span className="mt-1 block text-sm font-semibold text-cobalt">Lineup Sheet</span>
                   </span>
                   <CounterBadge count={session.playerIds.length} spots={session.spots} testId={`games-counter-${session.id}`} />
                 </button>

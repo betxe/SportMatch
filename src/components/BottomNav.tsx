@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   [
-    'flex min-h-12 flex-1 items-center justify-center px-1 text-center text-sm font-semibold leading-tight',
-    isActive ? 'text-cobalt' : 'text-ink',
+    'flex min-h-12 flex-1 items-center justify-center border-t-[3px] px-1 text-center text-sm font-semibold leading-tight',
+    isActive ? 'border-cobalt text-cobalt' : 'border-transparent text-ink',
   ].join(' ');
 
 export function BottomNav() {

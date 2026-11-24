@@ -136,6 +136,11 @@ export function CreateSession() {
       />
       <div className="px-4">
         <p className="text-sm font-semibold">Step {step} of 3</p>
+        <p className="mt-1 text-base text-ink">
+          {step === 1 ? 'Sport and Meeting point' : null}
+          {step === 2 ? 'Level, Pace / Intensity and Spots' : null}
+          {step === 3 ? 'Review the Session' : null}
+        </p>
         <div
           className="mt-2 h-2 overflow-hidden rounded-full bg-white"
           role="progressbar"

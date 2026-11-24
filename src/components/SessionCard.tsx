@@ -42,6 +42,7 @@ export function SessionCard({
       <p className="mt-2 text-base text-ink">{formatWhen(session.startsAt, now)}</p>
       <p className="mt-1 text-base text-muted">{session.meetingPoint}</p>
       {showDistance ? <p className="mt-1 text-sm font-semibold text-ink">{session.distanceKm.toFixed(1)} km</p> : null}
+      {onOpen ? <p className="mt-2 text-sm font-semibold text-cobalt">Lineup Sheet</p> : null}
     </>
   );
 

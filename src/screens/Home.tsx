@@ -55,7 +55,10 @@ export function Home() {
       />
       <main className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 pb-4">
         <FilterChips value={filter} playsTennis={playsTennis} onChange={setFilter} />
-        <h2 className="text-lg font-semibold">Noticeboard feed</h2>
+        <div>
+          <h2 className="text-lg font-semibold">Noticeboard feed</h2>
+          <p className="mt-1 text-sm text-muted">Tap a card to open the Lineup Sheet.</p>
+        </div>
         {visible.length === 0 ? (
           <div className="rounded-2xl border-[1.5px] border-[rgba(27,36,51,0.12)] bg-white p-6 text-center shadow-card">
             <p className="text-base text-ink">No sessions yet. Create the first one.</p>
