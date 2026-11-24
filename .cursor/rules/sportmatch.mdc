@@ -1,0 +1,25 @@
+---
+description: SportMatch hard constraints and required UI vocabulary
+alwaysApply: true
+---
+
+# SportMatch hard constraints
+
+SportMatch is a clickable university UX prototype, not a production app. Keep it faithful, simple, predictable, and fast. Do not add features that are not in the product specification.
+
+1. Technology: React 18 + TypeScript + Vite, Tailwind CSS, `react-router-dom` (HashRouter), `lucide-react` for icons. No backend. Persist state in `localStorage` (wrapped in try/catch). Provide a "Reset demo data" action.
+2. Mobile first: design for a 390 x 844 px viewport. On desktop, render the app inside a centred phone frame (about 390 px wide, rounded corners, subtle shadow, light grey page background). Never require horizontal scrolling.
+3. English UI text only, using exactly the vocabulary below.
+4. Max. 50% icons: most navigation and actions must be text labels. Icons only for sports, map pin, clock/bell, and the back arrow, and always paired with a text label where possible. A star on My Player Card and a tick on JOINED are part of the specified screens.
+5. No heavy maps: the meeting point is a court name plus a small static pin preview box (no map SDK, no network) and a text link "Open in Maps" that opens a Google Maps search URL in a new tab.
+6. Creating a session takes at most 3 steps. Joining takes one tap. No loading spinners longer than 300 ms.
+7. No chat threads or message feeds on the home screen. Chat exists only inside a session, and only for the Host and confirmed players.
+8. Everything must work offline after the first load. No external requests except Google Fonts (optional, with a system-font fallback).
+9. Keep the code clean: small components, typed data, no unused dependencies, a short README with run instructions.
+10. Scope is young adults only (18 to 30). Do not build child profiles, parent approval, elderly modes, voice search, gentle-pace tiers, real login, real database, push notifications, GPS routes, verified skill badges, interactive maps, payment, gym-partner matching, or running and cycling pace filters.
+
+# Vocabulary
+
+Use these labels exactly: Session, Sport, Level (Beg., Int., Adv.), Pace / Intensity, Host, Spots, Confirmed players, Live counter, Join, Join Game, Leave Session, Lineup Sheet, Noticeboard feed, My Games, My Player Card, Attendance, No-show, Near Me, Meeting point, 1h reminder!, Are you going? (Yes / No), Session Chat.
+
+Never use: fixtures, league, tournament, contract, chat threads, lobby.
